@@ -1,0 +1,130 @@
+.home-thumb{
+    text-align: center;
+    margin-top: 45%;
+}
+
+.home-thumb h1{
+    color: white;
+}
+
+.home-thumb .control-btn{
+    box-shadow: gray 3px 3px 5px;
+    border: solid 1px darkgray;
+    width: 150px;
+    border-radius: 10px;
+}
+
+#game-area{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.role-panel{
+    position: relative;
+}
+
+.timer-label{
+    font-size: 60px;
+    margin-top: 80px;
+    font-weight: 900;
+    color: green;
+    text-shadow: white 2px 2px 2px;
+}
+
+.remain-label{
+    font-size: 36px;
+    color: white;
+    mix-blend-mode: difference;
+    text-shadow: gray 1px 1px 2px;
+}
+
+.hint-label{
+    margin-left: 40px;
+    font-size: 30px;
+    padding: 5px 30px;
+    background-color: #7dc5e8;
+    color: black;
+}
+
+.grid-btn {
+    display: inline-block;
+    width: 6em;
+    height: 1em;
+    line-height: 1em;
+    font-size: 1.5em;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+    cursor: pointer;
+    background: #333355;
+    color: #ffffff;
+    margin: 1em;
+    -moz-border-radius: 10em;
+    -webkit-border-radius: 10em;
+    border-radius: 10em;
+    -khtml-border-radius: 10em;
+    position: relative;
+    padding: 10px;
+    box-shadow: #bdbaba 2px 2px 4px;
+    border: 1px solid darkgrey;
+}
+
+.owner-panel{
+    position: absolute;
+    right: 30px;
+    top: 100px;
+    width: 300px;
+    font-size: 20px;
+    padding: 10px;
+    z-index: 999;
+}
+
+.member-panel{
+    position: absolute;
+    left: 30px;
+    top: 100px;
+    width: 300px;
+    font-size: 20px;
+    padding: 10px;
+    z-index: 999;
+}
+
+.error-label{
+    text-align: center;
+    color: red;
+}
+
+.name-label{
+    text-align: center;
+    background: #7dc5e8;
+    color: black;
+    padding: 5px;
+    border: solid 1px black;
+}
+
+.list-pan{
+    overflow-x: hidden;
+    height: 350px;
+    background-color: #7dc5e8;
+    margin-top: 10px;
+    border: solid 1px black;
+}
+
+.score-label{
+    background: #7dc5e8;
+    color: black;
+    border: solid 1px black;
+    padding: 5px 5px 5px 15px;
+}
+
+.hint-panel{
+    text-align: center;
+    background: #7dc5e8;
+    color: black;
+    border: solid 1px black;
+    padding: 5px;
+}
