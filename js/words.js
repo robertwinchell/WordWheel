@@ -117556,6 +117556,7 @@ defaultWords = [
 "tylotes",
 "tymbal",
 "tymbals",
+"tymp",
 "tympan",
 "tympana",
 "tympanal",

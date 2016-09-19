@@ -43,6 +43,14 @@ function start_game(mode){
     init_game();
 }
 
+function renew(){
+    $('#home-area').removeClass('dis-none');
+    $('#game-area').addClass('dis-none');
+    if (timerId)
+        clearInterval(timerId);
+    $('#timer-label').html('');
+}
+
 function init_game(){
     // clear score
     score.owner = 0;
@@ -127,6 +135,38 @@ function init_game(){
 function end_game(){
     if (timerEnabled)
         clearInterval(timerId);
+
+    var text = '';
+    if (gameMode == 'single'){
+        if (matchWords.length > 0)
+            text = 'You were failed.';
+        else
+            text = 'Well Done.'
+    }
+    else {
+        if (score.owner > score.member)
+            text = 'Team A is win.';
+        else
+            text = 'Team B is win.'
+    }
+
+    var menu = $("<div>").addClass("menudiv");
+    menu.append("<h2>" + text + "</h2>");
+    var newBtn = $("<button class='btn btn-danger'>").text("New Game")
+        .click(function() {
+            menu.remove();
+            renew();
+        });
+    menu.append(newBtn);
+    var retryBtn = $("<button class='btn btn-success ml-20'>").text("Play Again")
+        .click(function(){
+            menu.remove();
+            init_game();
+        });
+    menu.append(retryBtn);
+
+    $("body").append(menu);
+
 }
 
 function click_letter(index){
@@ -171,6 +211,8 @@ function submit_word(user){
 
     if(gameMode != 'single'){
         curUser = (curUser == 'owner') ? 'member' : 'owner';
+        $('#hint-label').html('');
+        $('.name-label').toggleClass('active');
     }
 
     var err = null, index;
@@ -183,11 +225,11 @@ function submit_word(user){
         }
 
         if (err){
-            if(gameMode != 'single'){
+            //if(gameMode != 'single'){
                 curWord.owner = '';
                 ownerInputBox.val('');
                 $('.role-panel').find('.active').removeClass('active');
-            }
+            //}
             return display_error(ownerErrorElement, err);
         }
         else {
@@ -238,12 +280,11 @@ function enter_key(e, userRole){
 
     var char = String.fromCharCode(e.keyCode).toUpperCase(),
         err = null;
-/*
+
     if (curUser == 'owner')
         curWord[curUser] = ownerInputBox.val();
     else
         curWord[curUser] = memberInputBox.val();
-*/
 
     if (letters.indexOf(char) == -1){
         err = 'No Matched Character'
@@ -307,6 +348,13 @@ function click_hint(){
             }
         });
     }
+}
+
+function clear_word(userRole){
+    curWord[userRole] = '';
+    $('.role-panel').find('.active').removeClass('active');
+    ownerInputBox.val('');
+    memberInputBox.val('');
 }
 
 $(function(){
