@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-8 col-sm-12">
                 <div class="home-thumb">
-                    <h1>Games</h1>
+                    <h1>Word Wheel</h1>
                     <div class="mt-20">
                         <a class="btn btn-lg btn-success control-btn" onclick="start_game('single')">Single Player</a>
                         <a class="btn btn-lg btn-success control-btn ml-40" onclick="start_game('multi')">Multi Player</a>
@@ -45,7 +45,7 @@
                     Score:
                 </div>
                 <div class="mt-10 input-group">
-                    <input type="text" class="form-control" placeholder="Input Word" onkeypress="enter_key(event, 'owner')" id="owner-input">
+                    <input type="text" class="form-control" placeholder="Current Word" onkeypress="enter_key(event, 'owner')" id="owner-input">
                     <span class="input-group-btn"><button class="btn btn-danger" onclick="clear_word('owner')"><i class="glyphicon glyphicon-remove"></i></button> </span>
                 </div>
                 <div class="mt-10 error-label" id="owner-error"></div>
@@ -53,7 +53,7 @@
                     <button class="btn btn-primary form-control" onclick="submit_word('owner')">Submit Word</button>
                 </div>
                 <div class="mt-10 hint-panel">
-                    Hint Used
+                    Hints Used
                     <div class="row">
                         <div class="col-xs-3">
                             <input type="checkbox" class="form-control" disabled data-index="1" data-role="owner">
@@ -78,7 +78,7 @@
                     Score:
                 </div>
                 <div class="mt-10 input-group">
-                    <input type="text" class="form-control" placeholder="Click Piece" id="member-input" onkeypress="enter_key(event, 'member')">
+                    <input type="text" class="form-control" placeholder="Current Word" id="member-input" onkeypress="enter_key(event, 'member')">
                     <span class="input-group-btn"><button class="btn btn-danger" onclick="clear_word('member')"><i class="glyphicon glyphicon-remove"></i></button> </span>
                 </div>
                 <div class="mt-10 error-label" id="member-error"></div>
@@ -86,7 +86,7 @@
                     <button class="btn btn-primary form-control" onclick="submit_word('member')">Submit Word</button>
                 </div>
                 <div class="mt-10 hint-panel">
-                    Hint Used
+                    Hints Used
                     <div class="row">
                         <div class="col-xs-3">
                             <input type="checkbox" class="form-control" data-index="1" disabled data-role="member">
