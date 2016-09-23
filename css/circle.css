@@ -40,6 +40,37 @@
     font-size: 40px;
 }
 
+.circle.single{
+    width: 500px;
+    height: 500px;
+    font-size: 65px;
+    left: 180px;
+    margin: 30px auto;
+}
+
+.center-hub.single{
+    width: 260px;
+    height: 260px;
+    margin: -130px auto 1em 50px;
+    padding-top: 75px;
+    font-size: 65px;
+}
+
+@media (max-height: 800px) {
+    .circle.single{
+        width: 400px;
+        height: 400px;
+        font-size: 55px;
+    }
+    .center-hub.single{
+        width: 200px;
+        height: 200px;
+        margin: -100px auto 1em 85px;
+        padding: 55px 0 0;
+        font-size: 55px;
+    }
+}
+
 .circle li {
     overflow: hidden;
     position: absolute;

@@ -105,7 +105,7 @@
             </div>
 
             <div class="role-panel">
-                <ul class="circle">
+                <ul class="circle" id="circle-panel">
                     <li  onclick="click_letter('1')"><div id="letter1" class="text">1</div></li>
                     <li  onclick="click_letter('2')"><div id="letter2" class="text">2</div></li>
                     <li  onclick="click_letter('3')"><div id="letter3" class="text">3</div></li>
@@ -115,12 +115,10 @@
                     <li  onclick="click_letter('7')"><div id="letter7" class="text">7</div></li>
                     <li  onclick="click_letter('8')"><div id="letter8" class="text">8</div></li>
                 </ul>
-                <div class="center-hub" id="letter0" onclick="click_letter('0')">
-                    A
-                </div>
+                <div class="center-hub" id="letter0" onclick="click_letter('0')"></div>
             </div>
             <div class="ta-c remain-label" id="remain-label"></div>
-            <div class="mt-10 ta-c">
+            <div class="hint-control-panel">
                 <a class="btn btn-primary" onclick="click_hint()">Word Hint</a>
                 <span class="hint-label" id="hint-label"></span>
             </div>

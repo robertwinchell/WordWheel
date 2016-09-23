@@ -48,7 +48,7 @@ function renew(){
     $('#game-area').addClass('dis-none');
     if (timerId)
         clearInterval(timerId);
-    $('#timer-label').html('');
+    $('#timer-label').html('&nbsp;');
 }
 
 function init_game(){
@@ -112,10 +112,29 @@ function init_game(){
     memberScoreElement = $('#member-score');
     memberErrorElement = $('#member-error');
 
+    ownerInputBox.val('');
     ownerListPan.empty();
+    memberInputBox.val('');
     memberListPan.empty();
     $('#hint-label').html('');
     $("input:checkbox").prop('checked', false);
+
+    if (gameMode == 'single'){
+        $('#circle-panel').addClass('single');
+        $('#letter0').addClass('single');
+        $('.hint-control-panel').addClass('single');
+        $('.remain-label').addClass('single');
+        $('.timer-label').addClass('single');
+    }
+    else{
+        $('#circle-panel').removeClass('single');
+        $('#letter0').removeClass('single');
+        $('.hint-control-panel').removeClass('single');
+        $('.remain-label').removeClass('single');
+        $('.timer-label').removeClass('single');
+    }
+    $('.role-panel').find('.active').removeClass('active');
+
 
     if (timerEnabled){
         remainTime = defaultRemainTime;
@@ -139,15 +158,15 @@ function end_game(){
     var text = '';
     if (gameMode == 'single'){
         if (matchWords.length > 0)
-            text = 'You were failed.';
+            text = 'Nope.';
         else
             text = 'Well Done.'
     }
     else {
         if (score.owner > score.member)
-            text = 'Team A is win.';
+            text = 'Team A has won!';
         else
-            text = 'Team B is win.'
+            text = 'Team B has won!'
     }
 
     var menu = $("<div>").addClass("menudiv");
