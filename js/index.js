@@ -1,5 +1,14 @@
 var randLetter = function(){
-    return String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    var weight = 1.5, // Possibility to return a "weight" letter (J, Q, X, Z, F, H, K), bigger is less possibility.
+        letter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+
+    if (letter == 'J' || letter == 'Q' || letter == 'X' || letter == 'Z' || letter == 'F' || letter == 'H' || letter == 'K') {
+        if (!!Math.round(Math.random() * weight)) {
+            return randLetter();
+        }
+    }
+
+    return letter;
 };
 
 // global variables of games
@@ -26,6 +35,8 @@ var ownerInputBox,
     ;
 
 function start_game(mode){
+    $('#end-game').removeClass('dis-none');
+
     $('#home-area').addClass('dis-none');
     $('#game-area').removeClass('dis-none');
 
@@ -44,11 +55,68 @@ function start_game(mode){
 }
 
 function renew(){
+    $('#end-game').addClass('dis-none');
     $('#home-area').removeClass('dis-none');
     $('#game-area').addClass('dis-none');
     if (timerId)
         clearInterval(timerId);
     $('#timer-label').html('&nbsp;');
+}
+
+function force_end_game() {
+    if (timerEnabled)
+        clearInterval(timerId);
+
+    /*var menu = $("<div>").addClass("menudiv");
+    menu.append("<h2>" + text + "</h2>");
+    var newBtn = $("<button class='btn btn-danger'>").text("New Game")
+        .click(function() {
+            menu.remove();
+            renew();
+        });
+    menu.append(newBtn);
+    var retryBtn = $("<button class='btn btn-success ml-20'>").text("Play Again")
+        .click(function(){
+            menu.remove();
+            init_game();
+        });
+    menu.append(retryBtn);
+
+    $("body").append(menu);*/
+
+    var menu = $('<div>').addClass('menudiv');
+
+    if (gameMode == 'single') {
+        menu.append('<h2>Score: ' + score.owner + '</h2>');
+    } else {
+        menu.append('<h2>Team A score: ' + score.owner + '</h2>');
+        menu.append('<h2>Team B score: ' + score.member + '</h2>');
+    }
+
+    menu.append('<h3>Remaining words</h3>');
+
+    $.each(matchWords, (function(i, v) {
+        menu.append('<h4>' + v + '</h4>');
+    }));
+
+    var newBtn = $('<button class="btn btn-danger">').text('New Game')
+        .click(function() {
+            menu.remove();
+            renew();
+        });
+
+    var retryBtn = $('<button class="btn btn-success ml-20">').text('Play Again')
+        .click(function(){
+            menu.remove();
+            init_game();
+        });
+
+    menu.append('<h2>&nbsp;</h2>');
+
+    menu.append(newBtn);
+    menu.append(retryBtn);
+
+    $('body').append(menu);
 }
 
 function init_game(){
@@ -66,6 +134,25 @@ function init_game(){
         while(1){
             var char = randLetter();
             if (letters.indexOf(char) == -1){
+                // Check pairs weight
+                switch (char) {
+                    case 'W':
+                        if (letters.indexOf('H') == -1)
+                            continue;
+                        break;
+                    case 'S':
+                        if (letters.indexOf('T') == -1)
+                            continue;
+                        break;
+                    case 'T':
+                        if (letters.indexOf('S') == -1)
+                            continue;
+                        break;
+                    case 'Q':
+                        if (letters.indexOf('U') == -1)
+                            continue;
+                }
+
                 if (i != 0){
                     letters.push(char);
                     break;
