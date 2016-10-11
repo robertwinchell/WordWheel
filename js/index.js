@@ -60,29 +60,12 @@ function renew(){
     $('#game-area').addClass('dis-none');
     if (timerId)
         clearInterval(timerId);
-    $('#timer-label').html('&nbsp;');
+    $('#timer-label').html('&nbsp;').addClass('dis-none');
 }
 
 function force_end_game() {
     if (timerEnabled)
         clearInterval(timerId);
-
-    /*var menu = $("<div>").addClass("menudiv");
-    menu.append("<h2>" + text + "</h2>");
-    var newBtn = $("<button class='btn btn-danger'>").text("New Game")
-        .click(function() {
-            menu.remove();
-            renew();
-        });
-    menu.append(newBtn);
-    var retryBtn = $("<button class='btn btn-success ml-20'>").text("Play Again")
-        .click(function(){
-            menu.remove();
-            init_game();
-        });
-    menu.append(retryBtn);
-
-    $("body").append(menu);*/
 
     var menu = $('<div>').addClass('menudiv');
 
@@ -96,7 +79,7 @@ function force_end_game() {
     menu.append('<h3>Remaining words</h3>');
 
     $.each(matchWords, (function(i, v) {
-        menu.append('<h4>' + v + '</h4>');
+        menu.append('<h4 class="remainingWord">' + v + '</h4>');
     }));
 
     var newBtn = $('<button class="btn btn-danger">').text('New Game')
@@ -224,6 +207,8 @@ function init_game(){
 
 
     if (timerEnabled){
+        $('#timer-label').removeClass('dis-none');
+
         remainTime = defaultRemainTime;
         timerId = setInterval(function(){
             remainTime --;
