@@ -300,9 +300,11 @@ function submit_word(user){
     if (!curWord[user] || user != curUser)
         return;
 
+	singleHintWord = '';
+    $('#hint-label').html('');
+	
     if(gameMode != 'single'){
         curUser = (curUser == 'owner') ? 'member' : 'owner';
-        $('#hint-label').html('');
         $('.name-label').toggleClass('active');
     }
 
