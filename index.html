@@ -12,117 +12,118 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/circle.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/gameCore.css">    
 
 </head>
-<body style="background-color: blue">
-    <div style="background-color: grey">
-        <a class="btn btn-danger m5" onclick="renew()">Main Menu</a>
-        <a id="end-game" class="btn btn-danger m5 dis-none" onclick="force_end_game()">End Game</a>
+<body>
+    <div id="menuBar" class="dis-none">
+      <button class="coreBtn menu action" onclick="renew()">Main Menu</button>
+      <button class="coreBtn menu action" id="end-game" onclick="force_end_game()">End Game</button>   
+      <div class="timer-label ta-c dis-none" id="timer-label">&nbsp;</div> 
     </div>
+    
     <div class="container" id="home-area">
-        <div class="row">
-            <div class="col-md-offset-2 col-md-8 col-sm-12">
-                <div class="home-thumb">
-                    <h1>Word Wheel</h1>
-                    <div class="mt-20">
-                        <a class="btn btn-lg btn-success control-btn" onclick="start_game('single')">Single Player</a>
-                        <a class="btn btn-lg btn-success control-btn ml-40" onclick="start_game('multi')">Multi Player</a>
-                        <!--<a class="btn btn-lg btn-success control-btn">Start Game</a>-->
-                    </div>
-                    <div class="mt-20">
-                        <input type="checkbox" id="timer-check">
-                    </div>
-                </div>
+      <header>
+        <img class="gameTitle" src="wordWheelBanner.jpg" />
+        <img class="logo" src="logo.jpg" alt="in2l Logo" />
+      </header>
+      <section>
+      <!--
+      <div class="settingsRow bordered">
+        <button type="button" onClick="toggleModal('how-to')" class="btn info center">
+        <p>How to Play</p>
+        </button>
+      </div>
+      -->  
+
+        <div class="settingsRow">
+          <div class="col span7of12">
+            <div class="settingsBlock">
+              <h3>How many players or teams?</h3>
+              <button type="button" onClick="setPlayers('one');" class="coreBtn settings active" id="one">One</button>
+              <button type="button" onClick="setPlayers('two');" class="coreBtn settings" id="two">Two</button>
             </div>
+          </div>
+          <div class="col span5of12">
+            <div class="settingsBlock">
+              <h3>Timer</h3>
+              <button type="button" onClick="setTimer('on')" class="coreBtn settings active" id="timerOn">On</button>
+              <button type="button" onClick="setTimer('off')" class="coreBtn settings" id="timerOff">Off</button>
+            </div>
+          </div>
         </div>
+  
+        <div class="settingsRow">
+          <div class="settingsBlock">
+            <h3>&nbsp;</h3>
+            <button type="button" id="startGame" class="coreBtn action center" onclick="start_game()">Start Game</button>
+          </div>
+        </div>
+      </section>         
     </div>
+    
     <div style="position: relative">
-        <div id="game-area" class="dis-none">
-            <div class="timer-label ta-c dis-none" id="timer-label">&nbsp;</div>
+        <div id="game-area" class="dis-none gameBackground">   
             <div id="owner-panel" class="owner-panel">
                 <div class="name-label active">Team A</div>
                 <div id="owner-list-pan" class="list-pan"></div>
-                <div class="score-label" id="owner-score">
-                    Score:
-                </div>
-                <div class="mt-10 input-group">
-                    <input type="text" class="form-control" placeholder="Current Word" onkeypress="enter_key(event, 'owner')" id="owner-input">
-                    <span class="input-group-btn"><button class="btn btn-danger" onclick="clear_word('owner')"><i class="glyphicon glyphicon-remove"></i></button> </span>
-                </div>
-                <div class="mt-10 error-label" id="owner-error"></div>
-                <div class="mt-10">
-                    <button class="btn btn-primary form-control" onclick="submit_word('owner')">Submit Word</button>
-                </div>
-                <div class="mt-10 hint-panel">
-                    Hints Used
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <input type="checkbox" class="form-control" disabled data-index="1" data-role="owner">
-                        </div>
-                        <div class="col-xs-3">
-                            <input type="checkbox" class="form-control" disabled data-index="2" data-role="owner">
-                        </div>
-                        <div class="col-xs-3">
-                            <input type="checkbox" class="form-control" disabled data-index="3" data-role="owner">
-                        </div>
-                        <div class="col-xs-3">
-                            <input type="checkbox" class="form-control" disabled data-index="4" data-role="owner">
-                        </div>
-                    </div>
-                </div>
+                <div class="scoreAndHint owner">
+	                <div class="score-label">Score:</div>
+    	            <div class="hint-label">Hints Used:</div>                
+        	        <div id="owner-score"></div>
+            	    <div class="hints"><span id="owner-hints">0</span> of 4</div>
+				</div>
             </div>
 
             <div id="member-panel" class="member-panel">
                 <div class="name-label">Team B</div>
                 <div id="member-list-pan" class="list-pan"></div>
-                <div class="score-label" id="member-score">
-                    Score:
-                </div>
-                <div class="mt-10 input-group">
-                    <input type="text" class="form-control" placeholder="Current Word" id="member-input" onkeypress="enter_key(event, 'member')">
-                    <span class="input-group-btn"><button class="btn btn-danger" onclick="clear_word('member')"><i class="glyphicon glyphicon-remove"></i></button> </span>
-                </div>
-                <div class="mt-10 error-label" id="member-error"></div>
-                <div class="mt-10">
-                    <button class="btn btn-primary form-control" onclick="submit_word('member')">Submit Word</button>
-                </div>
-                <div class="mt-10 hint-panel">
-                    Hints Used
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <input type="checkbox" class="form-control" data-index="1" disabled data-role="member">
-                        </div>
-                        <div class="col-xs-3">
-                            <input type="checkbox" class="form-control" data-index="2" disabled data-role="member">
-                        </div>
-                        <div class="col-xs-3">
-                            <input type="checkbox" class="form-control" data-index="3" disabled data-role="member">
-                        </div>
-                        <div class="col-xs-3">
-                            <input type="checkbox" class="form-control" data-index="4" disabled data-role="member">
-                        </div>
-                    </div>
-                </div>
+                <div class="scoreAndHint member">
+	                <div class="score-label">Score:</div>
+    	            <div class="hint-label">Hints Used:</div>
+                
+        	        <div id="member-score"></div>
+            	    <div class="hints"><span id="member-hints">0</span> of 4</div>
+				</div>
             </div>
 
             <div class="role-panel">
                 <ul class="circle" id="circle-panel">
-                    <li  onclick="click_letter('1')"><div id="letter1" class="text">1</div></li>
-                    <li  onclick="click_letter('2')"><div id="letter2" class="text">2</div></li>
-                    <li  onclick="click_letter('3')"><div id="letter3" class="text">3</div></li>
-                    <li  onclick="click_letter('4')"><div id="letter4" class="text">4</div></li>
-                    <li  onclick="click_letter('5')"><div id="letter5" class="text">5</div></li>
-                    <li  onclick="click_letter('6')"><div id="letter6" class="text">6</div></li>
-                    <li  onclick="click_letter('7')"><div id="letter7" class="text">7</div></li>
-                    <li  onclick="click_letter('8')"><div id="letter8" class="text">8</div></li>
+                    <li  onclick="click_letter(1)"><div id="letter1" class="text">1</div></li>
+                    <li  onclick="click_letter(2)"><div id="letter2" class="text">2</div></li>
+                    <li  onclick="click_letter(3)"><div id="letter3" class="text">3</div></li>
+                    <li  onclick="click_letter(4)"><div id="letter4" class="text">4</div></li>
+                    <li  onclick="click_letter(5)"><div id="letter5" class="text">5</div></li>
+                    <li  onclick="click_letter(6)"><div id="letter6" class="text">6</div></li>
+                    <li  onclick="click_letter(7)"><div id="letter7" class="text">7</div></li>
+                    <li  onclick="click_letter(8)"><div id="letter8" class="text">8</div></li>
                 </ul>
-                <div class="center-hub" id="letter0" onclick="click_letter('0')"></div>
+                <div class="center-hub owner" id="letter0" onclick="click_letter('0')"></div>
             </div>
-            <div class="ta-c remain-label" id="remain-label"></div>
+
+		    <div class="error-label" id="only-error"></div>
+            <div id="owner" class="currentWordGroup active">                 
+                <span>Team A: </span> <input type="text" class="form-control" placeholder="Current Word" onkeypress="enter_key(event, 'owner')" id="owner-input">                
+                <div class="currentWordButtons">
+                    <button class="coreBtn action" onclick="submit_word('owner')">Submit Word</button>
+					<button class="coreBtn secondary" onclick="clear_word('owner')">Clear Word</button>                    
+                </div>
+            </div>   
+            
+            <div id="member" class="currentWordGroup">    
+                <span>Team B:</span> <input type="text" class="form-control" placeholder="Current Word" id="member-input" onkeypress="enter_key(event, 'member')">               
+                <div class="currentWordButtons">
+                    <button class="coreBtn action" onclick="submit_word('member')">Submit Word</button>
+					<button class="coreBtn secondary" onclick="clear_word('member')">Clear Word</button>   
+                </div>                               
+            </div>
+
             <div class="hint-control-panel">
-                <a class="btn btn-primary" onclick="click_hint()">Word Hint</a>
-                <span class="hint-label" id="hint-label"></span>
+                <div class="remain-label" id="remain-label"></div>
+                <button class="coreBtn action" onclick="click_hint()">Hint</button>
+                <div class="hint-block" id="hint-block"></div>
             </div>
+
         </div>
     </div>
 
