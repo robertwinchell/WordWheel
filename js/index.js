@@ -322,7 +322,7 @@ function init_game(){
             $('#timer-label').html((m<10 ? '0' + m : m) + ' : ' + (s<10 ? '0' + s : s));
             if (remainTime == 0)
                 end_game();
-        }, 100);		
+        }, 1000);		
 // temp code to lose faster        }, 1000);
     }
 
